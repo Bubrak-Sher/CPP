@@ -117,7 +117,6 @@ int Date::addDay(int aDay)
 		year += temp;
 		month %= 12;
 		goto opt;
-	
 	}
 	
 	if (month == 9 || month == 11 || month == 6 || month == 4)
@@ -137,8 +136,7 @@ int Date::addDay(int aDay)
 			day -= 31;
 			month++;
 			goto opt;
-		}
-					
+		}				
 	}
 	
 	if (month == 2)
