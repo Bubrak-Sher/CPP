@@ -1,0 +1,23 @@
+Add new Project 
+
+CLR Empty Project(.Net Framework)
+
+Now click on Project and add new item choose UI
+
+and select Windows Form
+
+Design your app and also add following:
+
+Add these Lines in MyForm.cpp
+###############################
+#include "MyForm.h"
+using namespace System;
+using namespace System::Windows::Forms;
+[STAThread]
+void main(array<String^)^ args)
+{
+	Application::EnableVisualityStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	ProjectName::FormName form;
+	Application::Run(% form);
+}
