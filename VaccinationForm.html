@@ -1,0 +1,213 @@
+<!I am deferent, I am Scorpio-BS>
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function VaccinationForm() {
+
+    var patient_ID = document.vaccinationForm.patientID.value;
+
+    var id_Card = document.vaccinationForm.idCard.value;
+    var p_name = document.vaccinationForm.name.value;
+    var p_address = document.vaccinationForm.address.value;
+    var p_center = document.vaccinationForm.vaccineCenter.value;
+    var form_date = document.vaccinationForm.firstDate.value;
+    var user_Date = new Date(form_date);
+    var refDate = new Date();
+    var p_email = document.vaccinationForm.emailID.value;
+    var p_phone = document.vaccinationForm.phoneNumber.value;
+    
+    var validemail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var digits = /^[0-9]+$/;
+    var alphabatics = /^[A-Za-z][ A-Za-z]+$/;
+
+    if(patient_ID != "" && patient_ID.length >= 11)
+    {
+        document.getElementById("idError").innerHTML = "";
+        document.getElementById("idSuccess").innerHTML = "Valid Patient ID";
+
+        if(id_Card != "" && id_Card.length == 13 && id_Card.match(digits))
+        {
+            document.getElementById("cardError").innerHTML = "";
+            document.getElementById("cardSuccess").innerHTML = "Valid CNIC Number";
+            
+            if(p_name != "" && p_name.length > 7 && p_name.match(alphabatics))
+            {
+                document.getElementById("nameError").innerHTML = "";
+                document.getElementById("nameSuccess").innerHTML = "Valid Name";
+                
+                if(p_address != "" && p_address.length > 9)
+                {
+                    document.getElementById("addressError").innerHTML = "";
+                    document.getElementById("addressSuccess").innerHTML = "Valid Address";
+
+                    if(p_center != "center")
+                    {
+                        document.getElementById("centerError").innerHTML = "";
+                        document.getElementById("centerSuccess").innerHTML = "Center Selected";
+                        
+                        if(user_Date < refDate)
+                        {
+                            document.getElementById("dateError").innerHTML = "";
+                            document.getElementById("dateSuccess").innerHTML = "Valid Date";
+                            
+                            if(p_email != "" && p_email.match(validemail))
+                            {
+                                document.getElementById("emailError").innerHTML = "";
+                                document.getElementById("emailSuccess").innerHTML = "Valid Email Format";
+                                
+                                if(p_phone != "" && p_phone.length == 11 && phoneNumber.match(digits))
+                                {
+                                    document.getElementById("phoneError").innerHTML = "";
+                                    document.getElementById("phoneSuccess").innerHTML = "Valid Phone Number";
+                                    return true;
+                                }
+                                else
+                                {
+                                    document.getElementById("phoneSuccess").innerHTML = "";
+                                    document.getElementById("phoneError").innerHTML = "Enter Valid Phone Number";
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                document.getElementById("emailSuccess").innerHTML = "";
+                                document.getElementById("emailError").innerHTML = "Email Should be in Valid format. i.e. abc@abc.com";
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            document.getElementById("dateSuccess").innerHTML = "";
+                            document.getElementById("dateError").innerHTML = "Date cannot be greater than today date";
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        document.getElementById("centerSuccess").innerHTML = "";
+                        document.getElementById("centerError").innerHTML = "Atleast and only one center should be selected";
+                        return false;
+                    }
+
+                }
+                else
+                {
+                    document.getElementById("addressSuccess").innerHTML = "";
+                    document.getElementById("addressError").innerHTML = "Length of Address Should not be less than 10";
+                    return false;
+                }
+            }
+            else
+            {
+                document.getElementById("nameSuccess").innerHTML = "";
+                document.getElementById("nameError").innerHTML = "Name should be in alphabatic characters and Must not less than 8 characters";
+                return false;
+            }
+        }
+        else
+        {
+            document.getElementById("cardSuccess").innerHTML = "";
+            document.getElementById("cardError").innerHTML = "ID Card Number only can contain numbers without dashes and be atleast 13 characters only ";
+            return false;
+        }
+
+    }
+    else
+    {
+        document.getElementById("idSuccess").innerHTML = "";
+        document.getElementById("idError").innerHTML = "Pin Code should not be less than 11";
+        return false;
+    }
+}
+
+</script>
+<style>
+body{
+    margin: 0px;
+    padding: 0px;
+    background: #F4A460;
+}
+#title{
+    width: 100%;
+    font-size: 30px;
+}
+#patientPage{
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+</style>
+</head>
+
+<body>
+
+    <div id = "title"> Form for Data Submission Partially Vaccinated Citizens</div>
+    <div id = "patientPage">
+        <form method="post" action ="#" name = "vaccinationForm" onsubmit="return VaccinationForm()">
+        <table>
+            <tr>
+                <td> Pincode ID: </td>
+                <td> <input type="text" name = "patientID" size="20"></td>
+                <td> <div style="color:red;" id = "idError"></div> <div style="color:green;" id = "idSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> ID Card#: </td>
+                <td> <input type="text" name = "idCard" size="20"></td>
+                <td> <div style="color:red;" id = "cardError"></div> <div style="color:green;" id = "cardSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> Name: </td>
+                <td> <input type="text" name = "name" size="40"></td>
+                <td> <div style="color:red;" id = "nameError"></div> <div style="color:green;" id = "nameSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> Address: </td>
+                <td> <input type="text" name = "address" size="40"></td>
+                <td> <div id = "addressError"></div> <div id = "addressSuccess"></div></td>
+            </tr>
+            <tr>
+            <td> Center </td>
+            <td>
+                <select id = "vCenter" name = "vaccineCenter">
+                <option value="center" > Please select vaccine Center</option>
+                <option value="Lahore Cantt" > Lahore Cantt</option>
+                <option value="Sialkot" > Sialkot</option>
+                <option value="Karachi" > Karachi</option>
+                <option value="Peshawar" > Peshawar</option>
+                <option value="Queta" > Queta</option>
+                <option value="Multan" > Multan</option>
+                </select>
+            </td>
+            <td> <div id = "centerError"> </div> <div id = "centerSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> First Dose Date </td>
+                <td> <input type = "date" name = "firstDate" size="40"></td>
+                <td> <div style="color:red;" id = "dateError"></div> <div style="color:green;" id = "dateSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> Email </td>
+                <td> <input type="text" name = "emailID" size="40"></td>
+                <td> <div style="color:red;" id = "emailError"></div> <div style="color:green;" id = "emailSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> Phone </td>
+                <td> <input type="text" name = "phoneNumber" size="40"></td>
+                <td> <div style="color:red;" id = "phoneError"></div> <div style="color:green;" id = "phoneSuccess"></div></td>
+            </tr>
+            <tr>
+                <td> Notes </td>
+                <td> <textarea type="text" name = "notes" size="40"> </textarea></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th colspan="3"><input type="submit"></th>
+            </tr>
+        </table>
+        </form>
+        </div>
+</body>
+</html>
